@@ -6,7 +6,7 @@ import ProductSlider from "@/components/list/ProductSlider";
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-28 md:mt-18 md:p-24">
+        <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-18 md:mt-18 md:p-24">
             {/* HERO */}
             <div className="w-screen">
                 <Image

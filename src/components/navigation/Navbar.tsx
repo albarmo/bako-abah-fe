@@ -5,6 +5,7 @@ import {
     ShoppingBagIcon,
     MagnifyingGlassIcon,
     XMarkIcon,
+    PhoneIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
@@ -102,7 +103,7 @@ const Navbar = () => {
                             className="text-md font-light w-full pl-10 pr-5 py-2 bg-gray-100 rounded-sm"
                         />
                     </div>
-                    <section className="flex space-x-12">
+                    <section className="flex space-x-5">
                         <Link href={"/wishlist"}>
                             <HeartIcon className="h-6 w-6" />
                         </Link>
@@ -129,7 +130,10 @@ const Navbar = () => {
                         className="pointer-events-none"
                     />
                     <section className="flex space-x-5">
-                        <Link href={"/Cart"} className="relative">
+                        <Link
+                            href={"/Cart"}
+                            className="relative hidden md:block"
+                        >
                             <Badge color="warning" content={5} shape="circle">
                                 <ShoppingBagIcon className="h-6 w-6 " />
                             </Badge>
@@ -161,11 +165,29 @@ const Navbar = () => {
                 <div
                     className={cn(
                         isMinimized ? "opacity-0" : "opacity-100 visible",
-                        "w-full h-12 overflow-x-scroll border-t flex justify-between items-center px-10 md:px-20",
-                        "transition-all duration-100 ease-out"
+                        "transition-all duration-100 ease-out",
+                        "w-full h-12 border-t flex justify-between items-center px-5 md:px-18 divide-x-1 space-x-5"
                     )}
                 >
-                    <ul className="flex space-x-16 lg:space-x-20">
+                    <Link
+                        href={"/Cart"}
+                        className="relative md:hidden flex space-x-5 "
+                    >
+                        <Badge color="warning" content={5} shape="circle">
+                            <ShoppingBagIcon className="h-6 w-6 " />
+                        </Badge>
+                        <Badge color="warning" content={5} shape="circle">
+                            <HeartIcon className="h-6 w-6 " />
+                        </Badge>
+                    </Link>
+                    <Link
+                        href={"/Cart"}
+                        className="relative md:flex items-center hidden space-x-5  w-80"
+                    >
+                        <PhoneIcon className="h-6 w-6 " />
+                        +62 0812-4555-2365
+                    </Link>
+                    <ul className="flex px-5 space-x-16 lg:space-x-20 overflow-x-scroll">
                         <li>Mole</li>
                         <li>Aksesoris</li>
                         <li>Grosir</li>
