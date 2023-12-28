@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import ProductList from "@/components/list/ProductList";
-import { Card, CardHeader, CardBody } from "@nextui-org/react";
+import { Card, CardHeader, CardBody, Button } from "@nextui-org/react";
 import ProductSlider from "@/components/list/ProductSlider";
 
 export default function Home() {
@@ -46,21 +46,21 @@ export default function Home() {
                 <h1 className="text-2xl font-base">Toko Abah</h1>
                 <div className="grid lg:grid-cols-3 lg:gap-5">
                     {[1, 2, 3].map((store, index) => (
-                        <Card key={index} className="py-4 w-auto mt-5">
+                        <Card key={index} className="py- w-auto mt-5">
                             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                                 <h4 className="font-bold text-large">
                                     Store {store}
                                 </h4>
                                 <p className="text-tiny uppercase font-bold">
-                                    Daily Mix
+                                    08:00 AM - 21:00 PM
                                 </p>
-                                <small className="text-default-500 my-2">
+                                <p className="text-default-500 my-2 leading-tight">
                                     Jl. RS. Fatmawati Raya, RT.8/RW.4, Cilandak
                                     Bar., Kec. Cilandak, Kota Jakarta Selatan,
                                     Daerah Khusus Ibukota Jakarta 12430
-                                </small>
+                                </p>
                             </CardHeader>
-                            <CardBody className="overflow-visible py-2">
+                            <CardBody className="overflow-visible py-2 relative">
                                 <Image
                                     alt="Card background"
                                     className="object-cover rounded-lg w-full"
@@ -68,6 +68,14 @@ export default function Home() {
                                     width={250}
                                     height={270}
                                 />
+                                <Button
+                                    className="mt-2"
+                                    variant="solid"
+                                    radius="sm"
+                                    color="warning"
+                                >
+                                    Meluncur
+                                </Button>
                             </CardBody>
                         </Card>
                     ))}
