@@ -55,14 +55,14 @@ export default function ProductList() {
                     Lihat Semua
                 </Link>
             </div>
-            <div className="gap-5 grid grid-cols-2 sm:grid-cols-5 mt-5">
+            <div className="gap-5 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-5">
                 {list.map((item, index) => (
                     <Card shadow="sm" radius="sm" key={index} isPressable>
                         <CardBody className="overflow-visible p-0">
                             <Image
                                 radius="none"
                                 alt={item.title}
-                                className="w-full object-cover h-[250px]"
+                                className="w-full object-cover h-40 md:h-[250px]"
                                 src={"/images/bundling-1.jpg"}
                             />
                         </CardBody>
