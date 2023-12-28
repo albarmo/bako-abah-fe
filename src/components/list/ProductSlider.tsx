@@ -1,15 +1,17 @@
 "use client";
 import { Image } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const ProductSlider = () => {
+    const router = useRouter();
     return (
         <div className="w-full h-full py-8">
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-base">Produk Bundling</h1>
-                <Link href={"/"} className="text-orange-base">
+                <Link href={"/product"} className="text-orange-base">
                     Lihat Semua
                 </Link>
             </div>
@@ -17,7 +19,11 @@ const ProductSlider = () => {
             <div className="mt-5 hidden md:block ">
                 <Swiper spaceBetween={10} slidesPerView={4.8}>
                     {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                        <SwiperSlide key={index} className="bg-white">
+                        <SwiperSlide
+                            key={index}
+                            className="bg-white cursor-pointer"
+                            onClick={() => router.push(`/product/${item}`)}
+                        >
                             <Image
                                 radius="none"
                                 width="100%"
@@ -39,7 +45,11 @@ const ProductSlider = () => {
             <div className="mt-5 block md:hidden ">
                 <Swiper spaceBetween={10} slidesPerView={3.4}>
                     {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                        <SwiperSlide key={index} className="bg-white">
+                        <SwiperSlide
+                            key={index}
+                            className="bg-white cursor-pointer"
+                            onClick={() => router.push(`/product/${item}`)}
+                        >
                             <Image
                                 radius="none"
                                 width="100%"

@@ -181,7 +181,7 @@ const Navbar = () => {
                         </Badge>
                     </Link>
                     <Link
-                        href={"/Cart"}
+                        href={"tel:081245552365"}
                         className="relative md:flex items-center hidden space-x-5  w-80"
                     >
                         <PhoneIcon className="h-6 w-6 " />

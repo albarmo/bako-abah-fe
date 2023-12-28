@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ProductList() {
+    const router = useRouter();
     const list = [
         {
             title: "Orange",
@@ -51,18 +55,24 @@ export default function ProductList() {
         <div className="py-8">
             <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-base">Produk</h1>
-                <Link href={"/"} className="text-orange-base">
+                <Link href={"/product"} className="text-orange-base">
                     Lihat Semua
                 </Link>
             </div>
-            <div className="gap-5 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-5">
+            <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-5">
                 {list.map((item, index) => (
-                    <Card shadow="sm" radius="sm" key={index} isPressable>
-                        <CardBody className="overflow-visible p-0">
+                    <Card
+                        shadow="sm"
+                        radius="sm"
+                        key={index}
+                        isPressable
+                        onClick={() => router.push(`/product/${item}`)}
+                    >
+                        <CardBody className="w-full h-60 overflow-visible p-0">
                             <Image
                                 radius="none"
                                 alt={item.title}
-                                className="w-full object-cover h-40 md:h-[250px]"
+                                className="w-full object-cover"
                                 src={"/images/bundling-1.jpg"}
                             />
                         </CardBody>

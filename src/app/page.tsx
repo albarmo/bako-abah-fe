@@ -1,12 +1,17 @@
+"use client";
 import Image from "next/image";
 import { HomeIcon } from "@heroicons/react/24/outline";
 import ProductList from "@/components/list/ProductList";
 import { Card, CardHeader, CardBody, Button } from "@nextui-org/react";
 import ProductSlider from "@/components/list/ProductSlider";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import Link from "next/link";
+
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-18 md:mt-18 md:p-24">
+        <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-16 md:mt-18 md:p-24">
             {/* HERO */}
             <div className="w-screen">
                 <Image
@@ -44,41 +49,111 @@ export default function Home() {
             {/* Store */}
             <section className="w-full block">
                 <h1 className="text-2xl font-base">Toko Abah</h1>
-                <div className="grid lg:grid-cols-3 lg:gap-5">
-                    {[1, 2, 3].map((store, index) => (
-                        <Card key={index} className="py- w-auto mt-5">
-                            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                                <h4 className="font-bold text-large">
-                                    Store {store}
-                                </h4>
-                                <p className="text-tiny uppercase font-bold">
-                                    08:00 AM - 21:00 PM
-                                </p>
-                                <p className="text-default-500 my-2 leading-tight">
-                                    Jl. RS. Fatmawati Raya, RT.8/RW.4, Cilandak
-                                    Bar., Kec. Cilandak, Kota Jakarta Selatan,
-                                    Daerah Khusus Ibukota Jakarta 12430
-                                </p>
-                            </CardHeader>
-                            <CardBody className="overflow-visible py-2 relative">
-                                <Image
-                                    alt="Card background"
-                                    className="object-cover rounded-lg w-full"
-                                    src="/images/store-1.png"
-                                    width={250}
-                                    height={270}
-                                />
-                                <Button
-                                    className="mt-2"
-                                    variant="solid"
-                                    radius="sm"
-                                    color="warning"
+                {/* Desktop View */}
+                <div className="hidden md:block">
+                    <Swiper spaceBetween={10} slidesPerView={2.8}>
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                            <SwiperSlide key={index} className="cursor-pointer">
+                                <Card
+                                    key={index}
+                                    shadow="none"
+                                    className="w-auto mt-5 shadow-sm"
                                 >
-                                    Meluncur
-                                </Button>
-                            </CardBody>
-                        </Card>
-                    ))}
+                                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                                        <h4 className="font-bold text-large">
+                                            Store {item}
+                                        </h4>
+                                        <p className="text-tiny uppercase font-bold">
+                                            08:00 AM - 21:00 PM
+                                        </p>
+                                        <p className="text-default-500 my-2 leading-tight">
+                                            Jl. RS. Fatmawati Raya, RT.8/RW.4,
+                                            Cilandak Bar., Kec. Cilandak, Kota
+                                            Jakarta Selatan, Daerah Khusus
+                                            Ibukota Jakarta 12430
+                                        </p>
+                                    </CardHeader>
+                                    <CardBody className="overflow-visible py-2 relative">
+                                        <Image
+                                            alt="Card background"
+                                            className="object-cover rounded-lg w-full"
+                                            src="/images/store-1.png"
+                                            width={250}
+                                            height={270}
+                                        />
+                                        <Link
+                                            target="_blank"
+                                            href={
+                                                "https://maps.app.goo.gl/2BGW1hs6CQHjJAb17"
+                                            }
+                                        >
+                                            <Button
+                                                className="mt-2 w-full"
+                                                variant="solid"
+                                                radius="sm"
+                                                color="warning"
+                                            >
+                                                Meluncur
+                                            </Button>
+                                        </Link>
+                                    </CardBody>
+                                </Card>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+                {/* Mobile View */}
+                <div className="block md:hidden">
+                    <Swiper spaceBetween={10} slidesPerView={1.8}>
+                        {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                            <SwiperSlide key={index} className="cursor-pointer">
+                                <Card
+                                    key={index}
+                                    shadow="none"
+                                    className="w-auto mt-5 shadow-sm"
+                                >
+                                    <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                                        <h4 className="font-bold text-large">
+                                            Store {item}
+                                        </h4>
+                                        <p className="text-tiny uppercase font-bold">
+                                            08:00 AM - 21:00 PM
+                                        </p>
+                                        <p className="text-default-500 my-2 leading-tight">
+                                            Jl. RS. Fatmawati Raya, RT.8/RW.4,
+                                            Cilandak Bar., Kec. Cilandak, Kota
+                                            Jakarta Selatan, Daerah Khusus
+                                            Ibukota Jakarta 12430
+                                        </p>
+                                    </CardHeader>
+                                    <CardBody className="overflow-visible py-2 relative">
+                                        <Image
+                                            alt="Card background"
+                                            className="object-cover rounded-lg w-full"
+                                            src="/images/store-1.png"
+                                            width={250}
+                                            height={270}
+                                        />
+                                        <Link
+                                            target="_blank"
+                                            href={
+                                                "https://maps.app.goo.gl/2BGW1hs6CQHjJAb17"
+                                            }
+                                        >
+                                            <Button
+                                                className="mt-2 w-full"
+                                                variant="solid"
+                                                radius="sm"
+                                                color="warning"
+                                            >
+                                                Meluncur
+                                            </Button>
+                                        </Link>
+                                    </CardBody>
+                                </Card>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
                 </div>
             </section>
             {/* All Products */}
