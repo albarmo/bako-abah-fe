@@ -4,6 +4,7 @@ import { Londrina_Solid, Londrina_Shadow } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
+import Footer from "@/components/navigation/Footer";
 
 const lodrinaSolid = Londrina_Solid({
     subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
                 <NextUIProvider>
                     <Navbar />
                     {children}
+                    <Footer />
                 </NextUIProvider>
             </body>
         </html>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import Link from "next/link";
 
 export default function ProductList() {
     const list = [
@@ -48,14 +49,18 @@ export default function ProductList() {
 
     return (
         <div className="py-8">
-            <h1 className="text-2xl font-base">Produk Bundling</h1>
-            <div className="gap-5 grid grid-cols-2 sm:grid-cols-4 mt-5">
+            <div className="flex justify-between items-center">
+                <h1 className="text-2xl font-base">Produk</h1>
+                <Link href={"/"} className="text-orange-base">
+                    Lihat Semua
+                </Link>
+            </div>
+            <div className="gap-5 grid grid-cols-2 sm:grid-cols-5 mt-5">
                 {list.map((item, index) => (
                     <Card shadow="sm" radius="sm" key={index} isPressable>
                         <CardBody className="overflow-visible p-0">
                             <Image
                                 radius="none"
-                                width="100%"
                                 alt={item.title}
                                 className="w-full object-cover h-[250px]"
                                 src={"/images/bundling-1.jpg"}

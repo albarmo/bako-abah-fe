@@ -95,6 +95,20 @@ export default function Home() {
             <ProductList />
             {/* Accesories Slider */}
             <ProductSlider />
+            {/* Brands */}
+            <div className="w-full">
+                <h1 className="text-2xl font-base">Brand Tembakau Pilihan</h1>
+                <section className="grid grid-cols-4 gap-5 mt-5">
+                    {[1, 2, 3, 4, 5, 6, 6, 7, 78, 8].map((item, index) => (
+                        <article
+                            key={index}
+                            className="h-20 bg-gray-200 flex  justify-center items-center"
+                        >
+                            Brand {item}
+                        </article>
+                    ))}
+                </section>
+            </div>
         </main>
     );
 }
