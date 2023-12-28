@@ -13,25 +13,50 @@ const ProductSlider = () => {
                     Lihat Semua
                 </Link>
             </div>
-            <Swiper spaceBetween={50} slidesPerView={5} className="mt-5">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                    <SwiperSlide key={index} className="w-96 h-60 bg-white">
-                        <Image
-                            radius="none"
-                            width="100%"
-                            alt="Product Image"
-                            className="w-full object-cover h-[250px] rounded"
-                            src={"/images/bundling-1.jpg"}
-                        />
-                        <section className="px-4 py-2">
-                            <h1 className="text-md font-normal line-clamp-2">
-                                Product {item}
-                            </h1>
-                            <p className="text-default-500">Rp 20.000</p>
-                        </section>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            {/* Desktop View */}
+            <div className="mt-5 hidden md:block ">
+                <Swiper spaceBetween={10} slidesPerView={4.8}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                        <SwiperSlide key={index} className="bg-white">
+                            <Image
+                                radius="none"
+                                width="100%"
+                                alt="Product Image"
+                                className=" object-cover  rounded"
+                                src={"/images/bundling-1.jpg"}
+                            />
+                            <section className="px-4 py-2">
+                                <h1 className="text-md font-normal line-clamp-2">
+                                    Product {item}
+                                </h1>
+                                <p className="text-default-500">Rp 20.000</p>
+                            </section>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+            {/* Mobile View */}
+            <div className="mt-5 block md:hidden ">
+                <Swiper spaceBetween={10} slidesPerView={3.4}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                        <SwiperSlide key={index} className="bg-white">
+                            <Image
+                                radius="none"
+                                width="100%"
+                                alt="Product Image"
+                                className=" object-cover rounded"
+                                src={"/images/bundling-1.jpg"}
+                            />
+                            <section className="px-4 py-2">
+                                <h1 className="text-md font-normal line-clamp-2">
+                                    Product {item}
+                                </h1>
+                                <p className="text-default-500">Rp 20.000</p>
+                            </section>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
     );
 };
