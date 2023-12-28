@@ -12,9 +12,12 @@ import { Badge, cn } from "@nextui-org/react";
 import Drawer from "./Drawer";
 import { usePathname } from "next/navigation";
 import useModalDisclosure from "@/hooks/useModalDisclosure";
+import useFocus from "@/hooks/useFocus";
 
 const Navbar = () => {
+    const [inputRef, setInputFocus] = useFocus();
     const [isMinimized, setIsMinimized] = useState<boolean>(false);
+
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY >= 100) {
@@ -57,6 +60,15 @@ const Navbar = () => {
     if (pathname === "/loading") {
         return <></>;
     }
+
+    // return (
+    //     <>
+    //         <button onClick={setInputFocus} >
+    //            Focus
+    //         </button>
+    //         <input ref={inputRef} />
+    //     </>
+    // )
 
     return (
         <header>
@@ -104,7 +116,10 @@ const Navbar = () => {
                 <div className="flex lg:hidden justify-between items-center px-5 h-20">
                     <MagnifyingGlassIcon
                         className="h-6 w-6 cursor-pointer"
-                        onClick={() => openSearchMode()}
+                        onClick={async () => {
+                            await openSearchMode();
+                            await setInputFocus();
+                        }}
                     />
                     <Image
                         src="/assets/web-logo.svg"
@@ -131,9 +146,11 @@ const Navbar = () => {
                 >
                     <div className="relative w-full bg-white">
                         <input
+                            ref={inputRef}
                             type="text"
                             placeholder="Cari produk tembakau seleramu"
                             className="text-md font-light w-full px-5 py-2 bg-gray-100 rounded-sm"
+                            autoFocus
                         />
                         <XMarkIcon
                             className="h-6 w-6 absolute top-2 right-2 cursor-pointer"
@@ -144,7 +161,7 @@ const Navbar = () => {
                 <div
                     className={cn(
                         isMinimized ? "opacity-0" : "opacity-100 visible",
-                        "w-full h-12 overflow-x-scroll border-t flex justify-between items-center px-20",
+                        "w-full h-12 overflow-x-scroll border-t flex justify-between items-center px-10 md:px-20",
                         "transition-all duration-100 ease-out"
                     )}
                 >
