@@ -19,11 +19,11 @@ export default function Home() {
                     className="w-screen"
                 />
                 <section>
-                    <ul className="flex w-full justify-around -mt-12 px-20 space-x-10">
+                    <ul className="grid grid-cols-2 md:grid-cols-4 gap-5 -mt-12 px-5 lg:px-10">
                         {[1, 2, 3, 4].map((store, index) => (
                             <li
                                 key={index}
-                                className="bg-white rounded-sm p-5 flex items-center space-x-3 h-24 shadow-sm"
+                                className="bg-white rounded-sm p-4 text-center md:text-left flex flex-col md:flex-row items-center space-x-3 h-auto md:h-24 shadow-sm"
                             >
                                 <HomeIcon className="w-10 h-10" />
                                 <span>
