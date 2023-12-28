@@ -44,7 +44,7 @@ export default function Home() {
             {/* Store */}
             <section className="w-full block">
                 <h1 className="text-2xl font-base">Toko Abah</h1>
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid lg:grid-cols-3 lg:gap-5">
                     {[1, 2, 3].map((store, index) => (
                         <Card key={index} className="py-4 w-auto mt-5">
                             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
