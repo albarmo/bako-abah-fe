@@ -58,19 +58,6 @@ const Navbar = () => {
         };
     }, []);
 
-    if (pathname === "/loading") {
-        return <></>;
-    }
-
-    // return (
-    //     <>
-    //         <button onClick={setInputFocus} >
-    //            Focus
-    //         </button>
-    //         <input ref={inputRef} />
-    //     </>
-    // )
-
     return (
         <header>
             <Drawer
@@ -88,13 +75,15 @@ const Navbar = () => {
             >
                 {/* Desktop */}
                 <div className="hidden lg:flex justify-between items-center px-20 h-28">
-                    <Image
-                        src="/assets/web-logo.svg"
-                        alt="Toko Tembakau Abah"
-                        width={180}
-                        height={180}
-                        className="pointer-events-none"
-                    />
+                    <Link href="/">
+                        <Image
+                            src="/assets/web-logo.svg"
+                            alt="Toko Tembakau Abah"
+                            width={180}
+                            height={180}
+                            className="pointer-events-none cursor-pointer"
+                        />
+                    </Link>
                     <div className="relative w-3/5">
                         <MagnifyingGlassIcon className="h-6 w-6 absolute top-2 left-2" />
                         <input
@@ -107,7 +96,7 @@ const Navbar = () => {
                         <Link href={"/wishlist"}>
                             <HeartIcon className="h-6 w-6" />
                         </Link>
-                        <Link href={"/Cart"}>
+                        <Link href={"/cart"}>
                             <ShoppingBagIcon className="h-6 w-6 " />
                         </Link>
                         {isMinimized && <Bars2Icon className="h-6 w-6" />}
@@ -122,16 +111,18 @@ const Navbar = () => {
                             await setInputFocus();
                         }}
                     />
-                    <Image
-                        src="/assets/web-logo.svg"
-                        alt="Toko Tembakau Abah"
-                        width={150}
-                        height={150}
-                        className="pointer-events-none"
-                    />
+                    <Link href="/">
+                        <Image
+                            src="/assets/web-logo.svg"
+                            alt="Toko Tembakau Abah"
+                            width={150}
+                            height={150}
+                            className="pointer-events-none cursor-pointer"
+                        />
+                    </Link>
                     <section className="flex space-x-5">
                         <Link
-                            href={"/Cart"}
+                            href={"/cart"}
                             className="relative hidden md:block"
                         >
                             <Badge color="warning" content={5} shape="circle">
@@ -170,7 +161,7 @@ const Navbar = () => {
                     )}
                 >
                     <Link
-                        href={"/Cart"}
+                        href={"/cart"}
                         className="relative md:hidden flex space-x-5 "
                     >
                         <Badge color="warning" content={5} shape="circle">
