@@ -10,50 +10,32 @@ export default function Home() {
             {/* HERO */}
             <div className="w-screen">
                 <Image
-                    src={"/images/hero-1.jpg"}
+                    src={
+                        "https://cdn.cigarcountry.com/wp-content/uploads/2022/08/09014512/CUBAN.jpg"
+                    }
                     alt={"Promo Tembakau Abah"}
                     width={500}
                     height={500}
                     className="w-screen"
                 />
                 <section>
-                    <ul className="flex w-full justify-around -mt-12 px-24 space-x-10">
-                        <li className="bg-white rounded-md p-5 flex items-center space-x-3 h-24 shadow-sm">
-                            <HomeIcon className="w-10 h-10" />
-                            <span>
-                                <h1 className="font-xl font-semibold">
-                                    Delivery Order
-                                </h1>
-                                <h2>Pengiriman pesanan langsung kerumah</h2>
-                            </span>
-                        </li>
-                        <li className="bg-white rounded-md p-5 flex items-center space-x-3 h-24 shadow-sm">
-                            <HomeIcon className="w-10 h-10" />
-                            <span>
-                                <h1 className="font-xl font-semibold">
-                                    Delivery Order
-                                </h1>
-                                <h2>Pengiriman pesanan langsung kerumah</h2>
-                            </span>
-                        </li>
-                        <li className="bg-white rounded-md p-5 flex items-center space-x-3 h-24 shadow-sm">
-                            <HomeIcon className="w-10 h-10" />
-                            <span>
-                                <h1 className="font-xl font-semibold">
-                                    Delivery Order
-                                </h1>
-                                <h2>Pengiriman pesanan langsung kerumah</h2>
-                            </span>
-                        </li>
-                        <li className="bg-white rounded-md p-5 flex items-center space-x-3 h-24 shadow-sm">
-                            <HomeIcon className="w-10 h-10" />
-                            <span>
-                                <h1 className="font-xl font-semibold">
-                                    Delivery Order
-                                </h1>
-                                <h2>Pengiriman pesanan langsung kerumah</h2>
-                            </span>
-                        </li>
+                    <ul className="flex w-full justify-around -mt-12 px-20 space-x-10">
+                        {[1, 2, 3, 4].map((store, index) => (
+                            <li
+                                key={index}
+                                className="bg-white rounded-sm p-5 flex items-center space-x-3 h-24 shadow-sm"
+                            >
+                                <HomeIcon className="w-10 h-10" />
+                                <span>
+                                    <h1 className="text-lg font-semibold">
+                                        Delivery Order
+                                    </h1>
+                                    <h2 className="leading-tight">
+                                        Pengiriman pesanan langsung kerumah
+                                    </h2>
+                                </span>
+                            </li>
+                        ))}
                     </ul>
                 </section>
             </div>
@@ -102,9 +84,14 @@ export default function Home() {
                     {[1, 2, 3, 4, 5, 6, 6, 7, 78, 8].map((item, index) => (
                         <article
                             key={index}
-                            className="h-20 bg-gray-200 flex  justify-center items-center"
+                            className="cursor-pointer h-20 bg-gray-200 flex  justify-center items-center grayscale hover:grayscale-0 transition-all transition-transform-opacity delay-75"
                         >
-                            Brand {item}
+                            <Image
+                                src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0d/Backwoods_%28cigar_brand%29_logo.svg/2560px-Backwoods_%28cigar_brand%29_logo.svg.png"
+                                alt="sa"
+                                width={100}
+                                height={100}
+                            />
                         </article>
                     ))}
                 </section>

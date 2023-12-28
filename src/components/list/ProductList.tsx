@@ -67,10 +67,12 @@ export default function ProductList() {
                             />
                         </CardBody>
                         <CardFooter className="text-small text-left block">
-                            <h1 className="text-md font-normal line-clamp-2">
+                            <h1 className="text-lg font-normal line-clamp-2">
                                 {item.title}
                             </h1>
-                            <p className="text-default-500">{item.price}</p>
+                            <p className="text-lg text-default-500">
+                                {item.price}
+                            </p>
                         </CardFooter>
                     </Card>
                 ))}

@@ -19,11 +19,8 @@
 body {
   color: #1E1E1E;
   background:  #FBFAFA;
-  font-family: var(--font-lodrina);
-  font-size: medium;
+  font-family: var(--font-alumni-sans);
+  font-size: large;
   font-weight: 300;
 }
 
-.font-lodrina-shaddow {
-  font-family: var(--font-lodrina-shaddow);
-}

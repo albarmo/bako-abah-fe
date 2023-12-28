@@ -1,20 +1,13 @@
 "use client";
-import type { Metadata } from "next";
-import { Londrina_Solid, Londrina_Shadow } from "next/font/google";
+import { Alumni_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import Footer from "@/components/navigation/Footer";
 
-const lodrinaSolid = Londrina_Solid({
+const alumniSans = Alumni_Sans({
     subsets: ["latin"],
-    weight: ["100", "300", "400", "900"],
-    variable: "--font-lodrina",
-});
-const lodrinaShaddow = Londrina_Shadow({
-    subsets: ["latin"],
-    weight: ["400"],
-    variable: "--font-lodrina-shaddow",
+    variable: "--font-alumni-sans",
 });
 
 export default function RootLayout({
@@ -46,7 +39,10 @@ export default function RootLayout({
                     href="/favicon-16x16.png"
                 />
             </head>
-            <body className={lodrinaSolid.className}>
+            <body
+                className={alumniSans.className}
+                style={{ overflowX: "hidden" }}
+            >
                 <NextUIProvider>
                     <Navbar />
                     {children}
