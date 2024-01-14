@@ -6,6 +6,7 @@ import {
     MagnifyingGlassIcon,
     XMarkIcon,
     PhoneIcon,
+    UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";
@@ -93,6 +94,9 @@ const Navbar = () => {
                         />
                     </div>
                     <section className="flex space-x-5">
+                        <Link href={"/user"}>
+                            <UserIcon className="h-6 w-6" />
+                        </Link>
                         <Link href={"/wishlist"}>
                             <HeartIcon className="h-6 w-6" />
                         </Link>
