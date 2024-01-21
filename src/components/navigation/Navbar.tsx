@@ -9,16 +9,53 @@ import {
     UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "@nextui-org/react";
 import { Badge, cn } from "@nextui-org/react";
 import Drawer from "./Drawer";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useModalDisclosure from "@/hooks/useModalDisclosure";
 import useFocus from "@/hooks/useFocus";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import { fetchCategoryList } from "@/helpers/category_server";
+import { fetchProductList } from "@/helpers/product_server";
+import { fromatRupiah } from "@/utils/func";
 
 const Navbar = () => {
+    const router = useRouter();
     const [inputRef, setInputFocus] = useFocus();
     const [isMinimized, setIsMinimized] = useState<boolean>(false);
+
+    const [params, setParams] = useState<ParamsType>({
+        page: 1,
+        limit: 10,
+        field: "",
+        sort: "desc",
+        keyword: "",
+        type: 1,
+    });
+
+    const { data: category, isLoading: isLoadingCategory } = useCustomQuery(
+        "categoryList",
+        params,
+        fetchCategoryList
+    );
+
+    const [paramsSearch, setParamsSearch] = useState<ParamsType>({
+        page: 1,
+        limit: 10,
+        field: "",
+        sort: "desc",
+        keyword: "",
+        type: 1,
+    });
+
+    console.log(paramsSearch);
+
+    const { data: product, isLoading: isLoadingProduct } = useCustomQuery(
+        "searchProduct",
+        params,
+        fetchProductList
+    );
 
     useEffect(() => {
         const handleScroll = () => {
@@ -91,7 +128,43 @@ const Navbar = () => {
                             type="text"
                             placeholder="Cari produk tembakau seleramu"
                             className="text-md font-light w-full pl-10 pr-5 py-2 bg-gray-100 rounded-sm"
+                            onChange={(e) =>
+                                setParamsSearch((prev) => {
+                                    return { ...prev, keyword: e.target.value };
+                                })
+                            }
                         />
+                        <div
+                            className={cn(
+                                paramsSearch.keyword ? "block" : "hidden",
+                                "absolute top-12 w-full bg-white shadow p-5"
+                            )}
+                        >
+                            {product?.data?.map((product: any) => (
+                                <article
+                                    key={product?.id}
+                                    className="flex space-x-3 mb-2 w-full cursor-pointer"
+                                    onClick={() =>
+                                        router.push(`/product/${product?.id}`)
+                                    }
+                                >
+                                    <Image
+                                        radius="sm"
+                                        alt={product?.name}
+                                        className="w-full object-cover"
+                                        src={`${process.env.apiUrl}${product?.image}`}
+                                        width={50}
+                                        height={50}
+                                    />
+                                    <section>
+                                        <h1>{product?.name}</h1>
+                                        <p className="text-lg text-default-500">
+                                            {fromatRupiah(product?.local_price)}
+                                        </p>
+                                    </section>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                     <section className="flex space-x-5">
                         <Link href={"/user"}>
@@ -103,7 +176,7 @@ const Navbar = () => {
                         <Link href={"/cart"}>
                             <ShoppingBagIcon className="h-6 w-6 " />
                         </Link>
-                        {isMinimized && <Bars2Icon className="h-6 w-6" />}
+                        <Bars2Icon className="h-6 w-6 block md:hidden" />
                     </section>
                 </div>
                 {/* Mobile */}
@@ -150,11 +223,47 @@ const Navbar = () => {
                             placeholder="Cari produk tembakau seleramu"
                             className="text-md font-light w-full px-5 py-2 bg-gray-100 rounded-sm"
                             autoFocus
+                            onChange={(e) =>
+                                setParamsSearch((prev) => {
+                                    return { ...prev, keyword: e.target.value };
+                                })
+                            }
                         />
                         <XMarkIcon
                             className="h-6 w-6 absolute top-2 right-2 cursor-pointer"
                             onClick={() => closeSearchMode()}
                         />
+                        <div
+                            className={cn(
+                                paramsSearch.keyword ? "block" : "hidden",
+                                "absolute w-full min-h-20 bg-white shadow p-5 z-40"
+                            )}
+                        >
+                            {product?.data?.map((product: any) => (
+                                <article
+                                    key={product?.id}
+                                    className="flex space-x-3 mb-2 w-full cursor-pointer"
+                                    onClick={() =>
+                                        router.push(`/product/${product?.id}`)
+                                    }
+                                >
+                                    <Image
+                                        radius="sm"
+                                        alt={product?.name}
+                                        className="w-full object-cover"
+                                        src={`${process.env.apiUrl}${product?.image}`}
+                                        width={50}
+                                        height={50}
+                                    />
+                                    <section>
+                                        <h1>{product?.name}</h1>
+                                        <p className="text-lg text-default-500">
+                                            {fromatRupiah(product?.local_price)}
+                                        </p>
+                                    </section>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div
@@ -183,18 +292,19 @@ const Navbar = () => {
                         +62 0812-4555-2365
                     </Link>
                     <ul className="flex px-5 space-x-16 lg:space-x-20 overflow-x-scroll">
-                        <li>Mole</li>
-                        <li>Aksesoris</li>
-                        <li>Grosir</li>
-                        <li>Premium</li>
-                        <li>Dugong</li>
-                        <li>Aksesoris</li>
-                        <li>Grosir</li>
-                        <li>Premium</li>
-                        <li>Dugong</li> <li>Aksesoris</li>
-                        <li>Grosir</li>
-                        <li>Premium</li>
-                        <li>Dugong</li>
+                        {category?.data?.map((category: any) => (
+                            <li
+                                key={category?.id}
+                                className="cursor-pointer"
+                                onClick={() =>
+                                    router.push(
+                                        `/category/${category?.name?.toLowerCase()}`
+                                    )
+                                }
+                            >
+                                {category?.name}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </nav>

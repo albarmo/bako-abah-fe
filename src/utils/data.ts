@@ -1,19 +1,7 @@
 export const MENU_DRAWER = [
     {
-        id: "001",
-        sectionTitle: "Tembakau",
-        body: [
-            { id: "001", title: "Mole", ref: "/" },
-            { id: "002", title: "Grosir", ref: "/#projects" },
-            { id: "003", title: "Kiloan", ref: "/#hwtd" },
-            { id: "004", title: "Tutorial Melinting", ref: "#" },
-            { id: "005", title: "Testing Testing", ref: "#concepts" },
-            { id: "006", title: "Just Another Menu Item", ref: "#backroom" },
-        ],
-    },
-    {
         id: "002",
-        sectionTitle: "Aksesoris",
+        sectionTitle: "Kontak",
         body: [
             {
                 id: "Contact",

@@ -2,10 +2,20 @@ import axios, { AxiosError } from 'axios';
 
 export const fetchProductList = async (params: { limit: string, status: boolean, offset: number, keyword: string }) => {
     const queryString = new URLSearchParams(params as any).toString();
-    console.log(queryString)
 
     try {
         const response = await axios.get(`/api/product`);
+        return response.data;
+    } catch (error) {
+        const axiosError = error as AxiosError;
+        const responseData = axiosError.response?.data;
+        return responseData;
+    }
+};
+
+export const fetchProductDetail = async (params: { id: string }) => {
+    try {
+        const response = await axios.get(`/api/product/${params?.id}`);
         return response.data;
     } catch (error) {
         const axiosError = error as AxiosError;
