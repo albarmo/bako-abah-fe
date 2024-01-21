@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { QueryKey, useQuery, UseQueryOptions } from 'react-query'; //QueryObserverResult
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { QueryKey, useQuery, UseQueryOptions } from "react-query"; //QueryObserverResult
 
-interface CustomHookOptions<TData, TError> extends UseQueryOptions<TData, TError> {
+interface CustomHookOptions<TData, TError>
+    extends UseQueryOptions<TData, TError> {
     queryKey: QueryKey;
 }
 
@@ -23,7 +24,8 @@ export default function useCustomQuery<
     options?: CustomHookOptions<TData, TError>
 ) {
     const [isLoading, setIsLoading] = useState(false);
-    const { staleTime = 100000, refetchOnMount = false, ...queryOptions } = options || {};
+    const { staleTime = 100000, refetchOnMount = false, ...queryOptions } =
+        options || {};
 
     const query = useQuery<TData, TError>(
         [queryKey, queryParams],
@@ -33,12 +35,12 @@ export default function useCustomQuery<
                 const data = await fetchFunction(queryParams);
                 return data;
             } catch (error) {
-                toast.error('Failed to load data: ' + error, {
+                toast.error("Failed to load data: " + error, {
                     duration: 1000,
                     style: {
-                        maxWidth: '350px',
+                        maxWidth: "350px",
                         fontSize: 12,
-                        textAlign: 'center',
+                        textAlign: "center",
                     },
                 });
                 throw error;

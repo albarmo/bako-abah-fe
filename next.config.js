@@ -34,6 +34,12 @@ const nextConfig = {
                 port: "",
                 pathname: "/**",
             },
+            {
+                protocol: "http",
+                hostname: "192.168.1.10",
+                port: "*",
+                pathname: "/**",
+            },
         ],
     },
     publicRuntimeConfig: {

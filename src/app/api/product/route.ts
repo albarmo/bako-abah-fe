@@ -10,6 +10,8 @@ export async function GET(req: Request, res: NextResponse) {
     const limit = url.searchParams.get("limit")
     const offset = url.searchParams.get("offset")
 
+    console.log({url, endpoint:`${apiUrl}/product`})
+
     try {
         const response = await axios.request({
             method: 'GET',

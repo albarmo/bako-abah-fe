@@ -8,8 +8,32 @@ import ProductSlider from "@/components/list/ProductSlider";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Link from "next/link";
+import { fetchProductList } from "@/helpers/product_server";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import { Key, useState } from "react";
+import { fetchStoreList } from "@/helpers/store_server";
 
 export default function Home() {
+     const [params, setParams] = useState<ParamsType>({
+        page: 1,
+        limit: 10,
+        field: '',
+        sort: 'desc',
+        keyword: '',
+        type: 1,
+    });
+
+    const {
+        data,
+        isLoading
+    } = useCustomQuery('productList', params, fetchProductList);
+     
+     const {
+        data:store,
+        isLoading:isLoadingStore
+     } = useCustomQuery('storeList', params, fetchStoreList);
+    
+     
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-16 md:mt-18 md:p-24">
             {/* HERO */}
@@ -45,46 +69,36 @@ export default function Home() {
                 </section>
             </div>
             {/* Bundling */}
-            <ProductList />
+            <ProductList data={data?.data} />
             {/* Store */}
             <section className="w-full block">
                 <h1 className="text-2xl font-base">Toko Abah</h1>
                 {/* Desktop View */}
                 <div className="hidden md:block">
                     <Swiper spaceBetween={10} slidesPerView={2.8}>
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                            <SwiperSlide key={index} className="cursor-pointer">
+                        {store?.data.map((store: any) => (
+                            <SwiperSlide key={store?.id} className="cursor-pointer">
                                 <Card
-                                    key={index}
                                     shadow="none"
                                     className="w-auto mt-5 shadow-sm"
                                 >
                                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                                         <h4 className="font-bold text-large">
-                                            Store {item}
+                                           {store?.name}
                                         </h4>
                                         <p className="text-tiny uppercase font-bold">
-                                            08:00 AM - 21:00 PM
+                                          {store?.operational_hour}
                                         </p>
                                         <p className="text-default-500 my-2 leading-tight">
-                                            Jl. RS. Fatmawati Raya, RT.8/RW.4,
-                                            Cilandak Bar., Kec. Cilandak, Kota
-                                            Jakarta Selatan, Daerah Khusus
-                                            Ibukota Jakarta 12430
+                                          {store?.address}
                                         </p>
+                                          <p className="text-default-500 my-2 leading-tight">{store?.admin_phone_number}</p>
                                     </CardHeader>
                                     <CardBody className="overflow-visible py-2 relative">
-                                        <Image
-                                            alt="Card background"
-                                            className="object-cover rounded-lg w-full"
-                                            src="/images/store-1.png"
-                                            width={250}
-                                            height={270}
-                                        />
                                         <Link
                                             target="_blank"
                                             href={
-                                                "https://maps.app.goo.gl/2BGW1hs6CQHjJAb17"
+                                               store?.map_url
                                             }
                                         >
                                             <Button
@@ -157,9 +171,9 @@ export default function Home() {
                 </div>
             </section>
             {/* All Products */}
-            <ProductList />
+            <ProductList data={data?.data} />
             {/* Accesories Slider */}
-            <ProductSlider />
+            <ProductSlider data={data?.data} />
             {/* Brands */}
             <div className="w-full">
                 <h1 className="text-2xl font-base">Brand Tembakau Pilihan</h1>

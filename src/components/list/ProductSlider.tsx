@@ -1,11 +1,14 @@
 "use client";
+import { fromatRupiah } from "@/utils/func";
 import { Image } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-const ProductSlider = () => {
+interface IPropsProductSlider {
+    data: any[] | undefined
+}
+const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
     const router = useRouter();
     return (
         <div className="w-full h-full py-8">
@@ -18,24 +21,26 @@ const ProductSlider = () => {
             {/* Desktop View */}
             <div className="mt-5 hidden md:block ">
                 <Swiper spaceBetween={10} slidesPerView={4.8}>
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                    {data?.map((product, index) => (
                         <SwiperSlide
                             key={index}
                             className="bg-white cursor-pointer"
-                            onClick={() => router.push(`/product/${item}`)}
+                            onClick={() => router.push(`/product/${product?.id}`)}
                         >
                             <Image
                                 radius="none"
                                 width="100%"
                                 alt="Product Image"
                                 className=" object-cover  rounded"
-                                src={"/images/bundling-1.jpg"}
+                                 src={`${process.env.apiUrl}/${product?.image}`}
                             />
                             <section className="px-4 py-2">
                                 <h1 className="text-md font-normal line-clamp-2">
-                                    Product {item}
+                                 {product?.name}
                                 </h1>
-                                <p className="text-default-500">Rp 20.000</p>
+                                <p className="text-default-500">
+                                    {fromatRupiah(product?.local_price)}
+                                </p>
                             </section>
                         </SwiperSlide>
                     ))}
@@ -44,24 +49,24 @@ const ProductSlider = () => {
             {/* Mobile View */}
             <div className="mt-5 block md:hidden ">
                 <Swiper spaceBetween={10} slidesPerView={3.4}>
-                    {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                    {data?.map((product, index) => (
                         <SwiperSlide
                             key={index}
                             className="bg-white cursor-pointer"
-                            onClick={() => router.push(`/product/${item}`)}
+                            onClick={() => router.push(`/product/${product?.id}`)}
                         >
                             <Image
                                 radius="none"
                                 width="100%"
                                 alt="Product Image"
                                 className=" object-cover rounded"
-                                src={"/images/bundling-1.jpg"}
+                                src={`${process.env.apiUrl}/${product?.image}`}
                             />
                             <section className="px-4 py-2">
                                 <h1 className="text-md font-normal line-clamp-2">
-                                    Product {item}
+                                   {product?.name}
                                 </h1>
-                                <p className="text-default-500">Rp 20.000</p>
+                                <p className="text-default-500"> {fromatRupiah(product?.local_price)}</p>
                             </section>
                         </SwiperSlide>
                     ))}
