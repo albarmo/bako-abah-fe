@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import Footer from "@/components/navigation/Footer";
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const alumniSans = Alumni_Sans({
     subsets: ["latin"],
@@ -15,6 +16,8 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const queryClient = new QueryClient();
+
     return (
         <html lang="en">
             <head>
@@ -43,11 +46,13 @@ export default function RootLayout({
                 className={alumniSans.className}
                 style={{ overflowX: "hidden" }}
             >
-                <NextUIProvider>
-                    <Navbar />
-                    {children}
-                    <Footer />
-                </NextUIProvider>
+                <QueryClientProvider client={queryClient}>
+                    <NextUIProvider>
+                        <Navbar />
+                        {children}
+                        <Footer />
+                    </NextUIProvider>
+                </QueryClientProvider>
             </body>
         </html>
     );
