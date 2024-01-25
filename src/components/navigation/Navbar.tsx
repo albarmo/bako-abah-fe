@@ -49,7 +49,6 @@ const Navbar = () => {
         type: 1,
     });
 
-    console.log(paramsSearch);
 
     const { data: product, isLoading: isLoadingProduct } = useCustomQuery(
         "searchProduct",
@@ -167,7 +166,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     <section className="flex space-x-5">
-                        <Link href={"/user"}>
+                        <Link href={"/sign-in"}>
                             <UserIcon className="h-6 w-6" />
                         </Link>
                         <Link href={"/wishlist"}>
