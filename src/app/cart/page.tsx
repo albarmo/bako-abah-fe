@@ -2,9 +2,29 @@
 import Image from "next/image";
 import { Button, Checkbox } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import useCustomQuery from "@/hooks/useCustomQuery";
+import { fetchUserCarts } from "@/helpers/cart_server";
+import { fromatRupiah } from "@/utils/func";
 
 export default function CheckoutPage() {
     const router = useRouter();
+    const [params, setParams] = useState<ParamsType>({
+        page: 1,
+        limit: 10,
+        field: "",
+        sort: "desc",
+        keyword: "",
+        type: 1,
+    });
+
+    const { data, isLoading } = useCustomQuery(
+        "cartlist",
+        params,
+        fetchUserCarts
+    );
+    const cartData = data?.data[0];
+
     return (
         <main className="flex flex-col items-center justify-between p-3 mt-32 md:mt-18 md:p-24">
             <div className="w-full">
@@ -15,9 +35,9 @@ export default function CheckoutPage() {
             </div>
             <div className="w-full h-min flex flex-col md:flex-row justify-center md:space-x-10 mt-5">
                 <div className="grid gap-y-2">
-                    {[1, 2, 3, 4].map((cart, index) => (
+                    {cartData?.items?.map((cartItem: any) => (
                         <article
-                            key={index}
+                            key={cartItem?.id}
                             className="w-full flex justify-between bg-gray-100"
                         >
                             <section className="flex space-x-3">
@@ -32,10 +52,15 @@ export default function CheckoutPage() {
                                 />
                                 <section className="leading-tight py-1">
                                     <h1 className="text-lg font-semibold">
-                                        Sampurna Grade A Premium Tobacco 100
-                                        Gram {cart}
+                                        {cartItem?.product?.name}
                                     </h1>
-                                    <p>Rp 20.000 - 10 Item</p>
+                                    <p>
+                                        Rp{" "}
+                                        {fromatRupiah(
+                                            cartItem?.product?.local_price
+                                        )}{" "}
+                                        {cartItem?.quantity} item
+                                    </p>
                                 </section>
                             </section>
                             <Button variant="light" size="sm" color="danger">
@@ -48,23 +73,26 @@ export default function CheckoutPage() {
                 <section className="w-full h-min md:w-2/6 bg-gray-100 p-5">
                     <h1 className="text-xl font-semibold">Ringkasan Pesanan</h1>
                     <hr className="my-3" />
-                    <section className="flex justify-between items-center">
-                        <p>Produk 1</p>
-                        <p className="text-sm">@1 Item</p> <p>Rp 40,900</p>
-                    </section>
-                    <section className="flex justify-between items-center">
-                        <p>Produk 2</p> <p className="text-sm">@2 Item</p>
-                        <p>Rp 40,900</p>
-                    </section>
-                    <section className="flex justify-between items-center">
-                        <p>Produk 3</p>
-                        <p className="text-sm">@2 Item</p> <p>Rp 40,900</p>
-                    </section>
+                    {cartData?.items?.map((cartItem: any) => (
+                        <section
+                            key={cartItem?.id}
+                            className="flex justify-between items-center"
+                        >
+                            <p>{cartItem?.product?.name}</p>
+                            <p className="text-sm">
+                                {cartItem?.quantity} item
+                            </p>{" "}
+                            <p>Rp {fromatRupiah(cartItem?.subtotal)}</p>
+                        </section>
+                    ))}
 
                     <hr className="my-3" />
+
                     <section className="flex justify-between items-center">
-                        <p>Total</p>{" "}
-                        <p className="text-xl font-semibold">Rp 40,900</p>
+                        <p> Total</p>{" "}
+                        <p className="text-xl font-semibold">
+                            Rp {fromatRupiah(cartData?.subtotal)}
+                        </p>
                     </section>
                     <section className="flex space-x-5 items-center mt-5">
                         <Button

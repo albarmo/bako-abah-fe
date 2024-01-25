@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import Footer from "@/components/navigation/Footer";
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const alumniSans = Alumni_Sans({
     subsets: ["latin"],

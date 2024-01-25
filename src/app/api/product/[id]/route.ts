@@ -8,7 +8,7 @@ export async function GET(req: Request, res: NextResponse) {
     try {
         const response = await axios.request({
             method: 'GET',
-            url: `${apiUrl}/product/e0413ab2-633b-4c8e-b98e-920519caf3de`,
+            url: `${apiUrl}/product/8df8dade-3cea-4424-8cf5-e7e86f361ea0`,
         });
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {
