@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 interface IPropsProductSlider {
-    data: any[] | undefined
+    data: { rows: any[] } | undefined
 }
-const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
+const ProductSlider: React.FC<IPropsProductSlider> = ({ data }) => {
     const router = useRouter();
     return (
         <div className="w-full h-full py-8">
@@ -21,7 +21,7 @@ const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
             {/* Desktop View */}
             <div className="mt-5 hidden md:block ">
                 <Swiper spaceBetween={10} slidesPerView={4.8}>
-                    {data?.map((product, index) => (
+                    {data?.rows?.map((product, index) => (
                         <SwiperSlide
                             key={index}
                             className="bg-white cursor-pointer"
@@ -32,11 +32,11 @@ const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
                                 width="100%"
                                 alt="Product Image"
                                 className=" object-cover  rounded"
-                                 src={`${process.env.apiUrl}/${product?.image}`}
+                                src={`${process.env.apiUrl}/${product?.image}`}
                             />
                             <section className="px-4 py-2">
                                 <h1 className="text-md font-normal line-clamp-2">
-                                 {product?.name}
+                                    {product?.name}
                                 </h1>
                                 <p className="text-default-500">
                                     {fromatRupiah(product?.local_price)}
@@ -49,7 +49,7 @@ const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
             {/* Mobile View */}
             <div className="mt-5 block md:hidden ">
                 <Swiper spaceBetween={10} slidesPerView={3.4}>
-                    {data?.map((product, index) => (
+                    {data?.rows?.map((product: any, index: number) => (
                         <SwiperSlide
                             key={index}
                             className="bg-white cursor-pointer"
@@ -64,7 +64,7 @@ const ProductSlider:React.FC<IPropsProductSlider> = ({data}) => {
                             />
                             <section className="px-4 py-2">
                                 <h1 className="text-md font-normal line-clamp-2">
-                                   {product?.name}
+                                    {product?.name}
                                 </h1>
                                 <p className="text-default-500"> {fromatRupiah(product?.local_price)}</p>
                             </section>

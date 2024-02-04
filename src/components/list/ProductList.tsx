@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import { fromatRupiah } from "@/utils/func";
 
 interface IPropsProductList {
-    data: any[] | undefined
+    data: { rows: any[] } | undefined
 }
-const ProductList:React.FC<IPropsProductList> = ({data}) =>  {
+const ProductList: React.FC<IPropsProductList> = ({ data }) => {
     const router = useRouter();
     return (
         <div className="py-8">
@@ -20,7 +20,7 @@ const ProductList:React.FC<IPropsProductList> = ({data}) =>  {
                 </Link>
             </div>
             <div className="gap-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-5">
-                {data?.map((item) => (
+                {data?.rows?.map((item) => (
                     <Card
                         key={item?.id}
                         shadow="sm"

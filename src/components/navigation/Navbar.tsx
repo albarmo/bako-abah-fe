@@ -139,7 +139,7 @@ const Navbar = () => {
                                 "absolute top-12 w-full bg-white shadow p-5"
                             )}
                         >
-                            {product?.data?.map((product: any) => (
+                            {product?.rows?.map((product: any) => (
                                 <article
                                     key={product?.id}
                                     className="flex space-x-3 mb-2 w-full cursor-pointer"
@@ -238,7 +238,7 @@ const Navbar = () => {
                                 "absolute w-full min-h-20 bg-white shadow p-5 z-40"
                             )}
                         >
-                            {product?.data?.map((product: any) => (
+                            {product?.rows?.map((product: any) => (
                                 <article
                                     key={product?.id}
                                     className="flex space-x-3 mb-2 w-full cursor-pointer"
