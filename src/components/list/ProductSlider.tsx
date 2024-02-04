@@ -49,7 +49,7 @@ const ProductSlider: React.FC<IPropsProductSlider> = ({ data }) => {
             {/* Mobile View */}
             <div className="mt-5 block md:hidden ">
                 <Swiper spaceBetween={10} slidesPerView={3.4}>
-                    {data?.rows?.map((product, index) => (
+                    {data?.rows?.map((product: any, index: number) => (
                         <SwiperSlide
                             key={index}
                             className="bg-white cursor-pointer"
