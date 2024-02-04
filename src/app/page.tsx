@@ -10,11 +10,11 @@ import "swiper/css";
 import Link from "next/link";
 import { fetchProductList } from "@/helpers/product_server";
 import useCustomQuery from "@/hooks/useCustomQuery";
-import { Key, useState } from "react";
+import { useState } from "react";
 import { fetchStoreList } from "@/helpers/store_server";
 
 export default function Home() {
-     const [params, setParams] = useState<ParamsType>({
+    const [params, setParams] = useState<ParamsType>({
         page: 1,
         limit: 10,
         field: '',
@@ -27,13 +27,13 @@ export default function Home() {
         data,
         isLoading
     } = useCustomQuery('productList', params, fetchProductList);
-     
-     const {
-        data:store,
-        isLoading:isLoadingStore
-     } = useCustomQuery('storeList', params, fetchStoreList);
-    
-     
+
+    const {
+        data: store,
+        isLoading: isLoadingStore
+    } = useCustomQuery('storeList', params, fetchStoreList);
+
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-16 md:mt-18 md:p-24">
             {/* HERO */}
@@ -84,21 +84,21 @@ export default function Home() {
                                 >
                                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
                                         <h4 className="font-bold text-large">
-                                           {store?.name}
+                                            {store?.name}
                                         </h4>
                                         <p className="text-tiny uppercase font-bold">
-                                          {store?.operational_hour}
+                                            {store?.operational_hour}
                                         </p>
                                         <p className="text-default-500 my-2 leading-tight">
-                                          {store?.address}
+                                            {store?.address}
                                         </p>
-                                          <p className="text-default-500 my-2 leading-tight">{store?.admin_phone_number}</p>
+                                        <p className="text-default-500 my-2 leading-tight">{store?.admin_phone_number}</p>
                                     </CardHeader>
                                     <CardBody className="overflow-visible py-2 relative">
                                         <Link
                                             target="_blank"
                                             href={
-                                               store?.map_url
+                                                store?.map_url
                                             }
                                         >
                                             <Button
