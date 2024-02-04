@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 interface IPropsProductSlider {
-    data: any[] | undefined
+    data: { rows: any[] } | undefined
 }
 const ProductSlider: React.FC<IPropsProductSlider> = ({ data }) => {
     const router = useRouter();

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { fromatRupiah } from "@/utils/func";
 
 interface IPropsProductList {
-    data: any[] | undefined
+    data: { rows: any[] } | undefined
 }
 const ProductList: React.FC<IPropsProductList> = ({ data }) => {
     const router = useRouter();
