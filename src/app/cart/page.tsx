@@ -23,17 +23,19 @@ export default function CheckoutPage() {
         params,
         fetchUserCarts
     );
-    const cartData = data?.data[0];
+
+    console.log(data)
+    // const cartData = data?.data[0];
 
     return (
         <main className="flex flex-col items-center justify-between p-3 mt-32 md:mt-18 md:p-24">
-            <div className="w-full">
+            {/* <div className="w-full">
                 <h1 className="text-2xl font-semibold w-full text-left">
                     Cart
                 </h1>
                 <p>Checlist produk yang ingin anda lanjutkan ke pembayaran</p>
-            </div>
-            <div className="w-full h-min flex flex-col md:flex-row justify-center md:space-x-10 mt-5">
+            </div> */}
+            {/* <div className="w-full h-min flex flex-col md:flex-row justify-center md:space-x-10 mt-5">
                 <div className="grid gap-y-2">
                     {cartData?.items?.map((cartItem: any) => (
                         <article
@@ -106,7 +108,7 @@ export default function CheckoutPage() {
                         </Button>
                     </section>
                 </section>
-            </div>
+            </div> */}
         </main>
     );
 }

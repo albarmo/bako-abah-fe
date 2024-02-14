@@ -33,7 +33,7 @@ const ProductList: React.FC<IPropsProductList> = ({ data }) => {
                                 radius="none"
                                 alt={item?.name}
                                 className="w-full object-cover"
-                                src={`${process.env.apiUrl}/${item?.image}`}
+                                src={`${item?.image}`}
                             />
                         </CardBody>
                         <CardFooter className="text-small text-left block">

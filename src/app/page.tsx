@@ -76,7 +76,7 @@ export default function Home() {
                 {/* Desktop View */}
                 <div className="hidden md:block">
                     <Swiper spaceBetween={10} slidesPerView={2.8}>
-                        {store?.data?.map((store: any) => (
+                        {store?.data?.rows?.map((store: any) => (
                             <SwiperSlide key={store?.id} className="cursor-pointer">
                                 <Card
                                     shadow="none"
