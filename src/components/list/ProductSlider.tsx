@@ -32,7 +32,7 @@ const ProductSlider: React.FC<IPropsProductSlider> = ({ data }) => {
                                 width="100%"
                                 alt="Product Image"
                                 className=" object-cover  rounded"
-                                src={`${process.env.apiUrl}/${product?.image}`}
+                                src={`${product?.image}`}
                             />
                             <section className="px-4 py-2">
                                 <h1 className="text-md font-normal line-clamp-2">

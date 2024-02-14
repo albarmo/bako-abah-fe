@@ -18,7 +18,7 @@ const DrawerComponent: React.FC<IPropsDrawer> = ({
     active,
     setCurrentSection,
 }) => {
-      const [params, setParams] = useState<ParamsType>({
+    const [params, setParams] = useState<ParamsType>({
         page: 1,
         limit: 10,
         field: '',
@@ -26,12 +26,12 @@ const DrawerComponent: React.FC<IPropsDrawer> = ({
         keyword: '',
         type: 1,
     });
-    
+
     const {
-        data:category,
-        isLoading:isLoadingCategory
+        data: category,
+        isLoading: isLoadingCategory
     } = useCustomQuery('categoryList', params, fetchCategoryList);
-    
+
     return (
         <div
             id="drawer-navigation"
@@ -46,45 +46,45 @@ const DrawerComponent: React.FC<IPropsDrawer> = ({
             >
                 <ul className="w-full">
                     <li
-                            key={22}
-                            className="h-max text-left flex flex-col md:flex-row w-full justify-start items-start space-x-5 md:space-x-10 pr-20 min-h-max px-5 py-5"
-                            id="navbar-menubar"
-                        >
-                            <section className="flex items-start justify-start space-x-4">
-                                <svg
-                                    width="6"
-                                    height="6"
-                                    viewBox="0 0 6 6"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <rect width="6" height="6" fill="#1E1E1E" />
-                                </svg>
-                                <p className="ml-3 -mt-2">
-                                  Category
-                                </p>
-                            </section>
-                            <div className="w-full">
-                                {
-                                    category?.data?.map((category: any) => (
-                                        <Link
-                                            key={category?.id}
-                                            href={`/${category?.name?.toLowerCase()}`}
-                                            onClick={() => {
-                                                close();
-                                                setCurrentSection(category?.name);
-                                            }}
-                                        >
-                                            <section className="group flex space-y-0 cursor-pointer p-x-5 w-full h-10 md:h-14">
-                                                <div className="text-xl w-full h-max md:text-xl font-semibold z-10 hover:text- hover:bg-gray-200 hover:mr-3 p-2">
-                                                    {category?.name}
-                                                </div>
-                                            </section>
-                                        </Link>
-                                    ))
-                                }
-                            </div>
-                        </li>
+                        key={22}
+                        className="h-max text-left flex flex-col md:flex-row w-full justify-start items-start space-x-5 md:space-x-10 pr-20 min-h-max px-5 py-5"
+                        id="navbar-menubar"
+                    >
+                        <section className="flex items-start justify-start space-x-4">
+                            <svg
+                                width="6"
+                                height="6"
+                                viewBox="0 0 6 6"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <rect width="6" height="6" fill="#1E1E1E" />
+                            </svg>
+                            <p className="ml-3 -mt-2">
+                                Category
+                            </p>
+                        </section>
+                        <div className="w-full">
+                            {
+                                category?.data?.rows?.map((category: any) => (
+                                    <Link
+                                        key={category?.id}
+                                        href={`/${category?.name?.toLowerCase()}`}
+                                        onClick={() => {
+                                            close();
+                                            setCurrentSection(category?.name);
+                                        }}
+                                    >
+                                        <section className="group flex space-y-0 cursor-pointer p-x-5 w-full h-10 md:h-14">
+                                            <div className="text-xl w-full h-max md:text-xl font-semibold z-10 hover:text- hover:bg-gray-200 hover:mr-3 p-2">
+                                                {category?.name}
+                                            </div>
+                                        </section>
+                                    </Link>
+                                ))
+                            }
+                        </div>
+                    </li>
                     {MENU_DRAWER.map((menu: any, index: number) => (
                         <li
                             key={menu?.id}

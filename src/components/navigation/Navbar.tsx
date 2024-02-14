@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-    HeartIcon,
     Bars2Icon,
     ShoppingBagIcon,
     MagnifyingGlassIcon,
@@ -169,9 +168,6 @@ const Navbar = () => {
                         <Link href={"/sign-in"}>
                             <UserIcon className="h-6 w-6" />
                         </Link>
-                        <Link href={"/wishlist"}>
-                            <HeartIcon className="h-6 w-6" />
-                        </Link>
                         <Link href={"/cart"}>
                             <ShoppingBagIcon className="h-6 w-6 " />
                         </Link>
@@ -279,9 +275,6 @@ const Navbar = () => {
                         <Badge color="warning" content={5} shape="circle">
                             <ShoppingBagIcon className="h-6 w-6 " />
                         </Badge>
-                        <Badge color="warning" content={5} shape="circle">
-                            <HeartIcon className="h-6 w-6 " />
-                        </Badge>
                     </Link>
                     <Link
                         href={"tel:081245552365"}
@@ -291,7 +284,7 @@ const Navbar = () => {
                         +62 0812-4555-2365
                     </Link>
                     <ul className="flex px-5 space-x-16 lg:space-x-20 overflow-x-scroll">
-                        {category?.data?.map((category: any) => (
+                        {category?.data?.rows?.map((category: any) => (
                             <li
                                 key={category?.id}
                                 className="cursor-pointer"
