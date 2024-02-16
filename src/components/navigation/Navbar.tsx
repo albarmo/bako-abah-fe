@@ -18,6 +18,15 @@ import useCustomQuery from "@/hooks/useCustomQuery";
 import { fetchCategoryList } from "@/helpers/category_server";
 import { fetchProductList } from "@/helpers/product_server";
 import { fromatRupiah } from "@/utils/func";
+import { debounce } from "@/utils/debouncer";
+
+type TParamsSearchProduct = {
+    limit: number;
+    page: number;
+    sort: string;
+    filter: any;
+};
+
 
 const Navbar = () => {
     const router = useRouter();
@@ -26,7 +35,7 @@ const Navbar = () => {
 
     const [params, setParams] = useState<ParamsType>({
         page: 1,
-        limit: 10,
+        limit: 8,
         field: "",
         sort: "desc",
         keyword: "",
@@ -39,21 +48,37 @@ const Navbar = () => {
         fetchCategoryList
     );
 
-    const [paramsSearch, setParamsSearch] = useState<ParamsType>({
-        page: 1,
-        limit: 10,
-        field: "",
-        sort: "desc",
-        keyword: "",
-        type: 1,
-    });
 
+    const [paramsSearch, setParamsSearch] = React.useState<TParamsSearchProduct>({
+        limit: 5,
+        page: 1,
+        filter: { name: "", is_active: true },
+        sort: "name",
+    });
 
     const { data: product, isLoading: isLoadingProduct } = useCustomQuery(
         "searchProduct",
-        params,
-        fetchProductList
+        paramsSearch,
+        (paramsSearch?: TParamsSearchProduct) => {
+            if (paramsSearch?.filter?.name) {
+                return fetchProductList(paramsSearch);
+            }
+            return Promise.resolve(undefined);
+        }
     );
+
+
+    const handleSearch = debounce(
+        (keyword: string) =>
+            setParamsSearch((prevParams) => ({
+                ...prevParams,
+                filter: { ...paramsSearch.filter, name: keyword },
+                limit: 10,
+                page: 1,
+            })),
+        1000
+    );
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -127,18 +152,16 @@ const Navbar = () => {
                             placeholder="Cari produk tembakau seleramu"
                             className="text-md font-light w-full pl-10 pr-5 py-2 bg-gray-100 rounded-sm"
                             onChange={(e) =>
-                                setParamsSearch((prev) => {
-                                    return { ...prev, keyword: e.target.value };
-                                })
+                                handleSearch(e.target.value)
                             }
                         />
                         <div
                             className={cn(
-                                paramsSearch.keyword ? "block" : "hidden",
+                                paramsSearch.filter?.name ? "block" : "hidden",
                                 "absolute top-12 w-full bg-white shadow p-5"
                             )}
                         >
-                            {product?.rows?.map((product: any) => (
+                            {product?.data?.rows?.map((product: any) => (
                                 <article
                                     key={product?.id}
                                     className="flex space-x-3 mb-2 w-full cursor-pointer"
@@ -219,9 +242,7 @@ const Navbar = () => {
                             className="text-md font-light w-full px-5 py-2 bg-gray-100 rounded-sm"
                             autoFocus
                             onChange={(e) =>
-                                setParamsSearch((prev) => {
-                                    return { ...prev, keyword: e.target.value };
-                                })
+                                handleSearch(e.target.value)
                             }
                         />
                         <XMarkIcon
@@ -230,11 +251,11 @@ const Navbar = () => {
                         />
                         <div
                             className={cn(
-                                paramsSearch.keyword ? "block" : "hidden",
+                                paramsSearch.filter?.name ? "block" : "hidden",
                                 "absolute w-full min-h-20 bg-white shadow p-5 z-40"
                             )}
                         >
-                            {product?.rows?.map((product: any) => (
+                            {product?.data?.rows?.map((product: any) => (
                                 <article
                                     key={product?.id}
                                     className="flex space-x-3 mb-2 w-full cursor-pointer"
@@ -283,14 +304,14 @@ const Navbar = () => {
                         <PhoneIcon className="h-6 w-6 " />
                         +62 0812-4555-2365
                     </Link>
-                    <ul className="flex px-5 space-x-16 lg:space-x-20 overflow-x-scroll">
+                    <ul className="flex items-center px-5 space-x-16 lg:space-x-20 overflow-x-scroll ">
                         {category?.data?.rows?.map((category: any) => (
                             <li
                                 key={category?.id}
-                                className="cursor-pointer"
+                                className="cursor-pointer w-max"
                                 onClick={() =>
                                     router.push(
-                                        `/category/${category?.name?.toLowerCase()}`
+                                        `/category/${category?.id}`
                                     )
                                 }
                             >

@@ -33,7 +33,6 @@ export default function Home() {
         isLoading: isLoadingStore
     } = useCustomQuery('storeList', params, fetchStoreList);
 
-
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-16 md:mt-18 md:p-24">
             {/* HERO */}
@@ -83,9 +82,9 @@ export default function Home() {
                                     className="w-auto mt-5 shadow-sm"
                                 >
                                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                                        <h4 className="font-bold text-large">
+                                        <h1 className="font-bold text-large">
                                             {store?.name}
-                                        </h4>
+                                        </h1>
                                         <p className="text-tiny uppercase font-bold">
                                             {store?.operational_hour}
                                         </p>
@@ -97,9 +96,7 @@ export default function Home() {
                                     <CardBody className="overflow-visible py-2 relative">
                                         <Link
                                             target="_blank"
-                                            href={
-                                                store?.map_url
-                                            }
+                                            href={store?.map_url}
                                         >
                                             <Button
                                                 className="mt-2 w-full"
@@ -119,40 +116,28 @@ export default function Home() {
                 {/* Mobile View */}
                 <div className="block md:hidden">
                     <Swiper spaceBetween={10} slidesPerView={1.8}>
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
-                            <SwiperSlide key={index} className="cursor-pointer">
+                        {store?.data?.rows?.map((store: any) => (
+                            <SwiperSlide key={store?.id} className="cursor-pointer">
                                 <Card
-                                    key={index}
                                     shadow="none"
                                     className="w-auto mt-5 shadow-sm"
                                 >
                                     <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                                        <h4 className="font-bold text-large">
-                                            Store {item}
-                                        </h4>
+                                        <h1 className="font-bold text-large">
+                                            {store?.name}
+                                        </h1>
                                         <p className="text-tiny uppercase font-bold">
-                                            08:00 AM - 21:00 PM
+                                            {store?.operational_hour}
                                         </p>
                                         <p className="text-default-500 my-2 leading-tight">
-                                            Jl. RS. Fatmawati Raya, RT.8/RW.4,
-                                            Cilandak Bar., Kec. Cilandak, Kota
-                                            Jakarta Selatan, Daerah Khusus
-                                            Ibukota Jakarta 12430
+                                            {store?.address}
                                         </p>
+                                        <p className="text-default-500 my-2 leading-tight">{store?.admin_phone_number}</p>
                                     </CardHeader>
                                     <CardBody className="overflow-visible py-2 relative">
-                                        <Image
-                                            alt="Card background"
-                                            className="object-cover rounded-lg w-full"
-                                            src="/images/store-1.png"
-                                            width={250}
-                                            height={270}
-                                        />
                                         <Link
                                             target="_blank"
-                                            href={
-                                                "https://maps.app.goo.gl/2BGW1hs6CQHjJAb17"
-                                            }
+                                            href={store?.map_url}
                                         >
                                             <Button
                                                 className="mt-2 w-full"

@@ -4,6 +4,7 @@ import { fetchProductDetail } from "@/helpers/product_server";
 import useCustomQuery from "@/hooks/useCustomQuery";
 import { useState } from "react";
 import { fromatRupiah } from "@/utils/func";
+const fallbackSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAACUCAMAAABREOc7AAAAPFBMVEXm6eyQm6fq7e/S1tujrLagqbPa3uHj5und4eWmr7jX29+cpbDb3uOTnqmWoauutb7L0NWyusG8w8nFytCrkPVyAAABhUlEQVR4nO3Zy46DIBhAYeSiXApY+/7vOqDTmdSy1sV/vk0TuyEnlIIoBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAi6ZG7B3UL7c2YF9hjrXasruJqGJeLGyk5mbsHdzVXnvNYLfbuwV1smVwc/xq0SdNy8Whu1mL48Tf6ITaG9lGdZsjDCY2xPJ0Lp38PqTH8VnIuwXzUkBpjdm6da34Ro8WIOcx6m7bfGMeH1Bi+ZhtKOmaGjtu+pkqNoUxbM6Ztf6KNLW5WgmOo5bUdm+/eopT+UG6M9yajtchhDdl5LTjGQbdzm33o2ebkvfAY+7yYtWo1ijOyY7xbqL1GEXs26f5b7DWS6Bi9xd95vteQG0N/tNjXUrExzi36gUVsjK8Wgjdd3y3kxmgt6vldqNQYoxZK5DvQ2M9mvcXpftGkLCyGah1MKPbl41kt9e7BXa2dzHLbebt0lrOLdw/ucmsNY08j7q6135gML+G/7lEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIIfVKAQLyZiv80AAAAASUVORK5CYII='
 
 export default function ProductDetailPage({
     params,
@@ -23,21 +24,20 @@ export default function ProductDetailPage({
     );
 
     return (
-        <main className="flex flex-col min-h-screen items-center justify-between p-3 mt-28 md:mt-18 md:p-24">
-            {/* HERO */}
+        <main className="flex flex-col min-h-screen items-center justify-start p-3 mt-28 md:mt-18 md:p-24">
             <div className="w-screen flex flex-col md:flex-row justify-center md:space-x-10">
                 <Image
-                    src={`${process.env.apiUrl}/${product?.data?.image}`}
+                    src={product?.data?.image || fallbackSrc}
+                    fallbackSrc={fallbackSrc}
                     alt={product?.data?.name}
-                    className="w-full aspect-square"
-                    width={"100vw"}
+                    className="w-full aspect-square object-cover bg-no-repeat md:w-96"
                     radius="none"
                 />
                 <section className="w-full md:w-3/6 p-5 md:p-0">
-                    <h1 className="text-xl font-semibold">
+                    <h1 className="text-3xl font-semibold">
                         {product?.data?.name}
                     </h1>
-                    <p>{fromatRupiah(product?.data?.local_price)}</p>
+                    <p className="text-2xl">Rp {fromatRupiah(product?.data?.local_price)}</p>
                     <p>Tersedia {product?.data?.stock} Item</p>
                     <hr className="my-3" />
                     <Input
@@ -46,7 +46,7 @@ export default function ProductDetailPage({
                         placeholder="1"
                         defaultValue="1"
                         labelPlacement="outside"
-                        className="w-20 mt-10 py-3 text-xl"
+                        className="w-20 mt-10 py-3 text-2xl"
                         size="lg"
                         width={100}
                         max={product?.data?.stock}
@@ -71,8 +71,6 @@ export default function ProductDetailPage({
                     </section>
                 </section>
             </div>
-            {/* Similar Products */}
-            {/* <ProductSlider /> */}
         </main>
     );
 }
