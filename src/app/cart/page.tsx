@@ -9,32 +9,20 @@ import { fromatRupiah } from "@/utils/func";
 
 export default function CheckoutPage() {
     const router = useRouter();
-    const [params, setParams] = useState<ParamsType>({
-        page: 1,
-        limit: 10,
-        field: "",
-        sort: "desc",
-        keyword: "",
-        type: 1,
-    });
-
-    const { data, isLoading } = useCustomQuery(
-        "cartlist",
-        params,
+    const { data: userCart, isLoading } = useCustomQuery(
+        "getUserCart",
+        {},
         fetchUserCarts
     );
 
-    console.log(data)
-    // const cartData = data?.data[0];
-
     return (
-        <main className="flex flex-col items-center justify-between p-3 mt-32 md:mt-18 md:p-24">
-            {/* <div className="w-full">
+        <div className="flex flex-col items-center justify-between p-3 mt-32 md:mt-18 md:p-24">
+            <div className="w-full">
                 <h1 className="text-2xl font-semibold w-full text-left">
                     Cart
                 </h1>
                 <p>Checlist produk yang ingin anda lanjutkan ke pembayaran</p>
-            </div> */}
+            </div>
             {/* <div className="w-full h-min flex flex-col md:flex-row justify-center md:space-x-10 mt-5">
                 <div className="grid gap-y-2">
                     {cartData?.items?.map((cartItem: any) => (
@@ -109,6 +97,6 @@ export default function CheckoutPage() {
                     </section>
                 </section>
             </div> */}
-        </main>
+        </div>
     );
 }

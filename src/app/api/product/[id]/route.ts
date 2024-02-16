@@ -3,12 +3,12 @@ import axios from 'axios';
 
 const apiUrl = process.env.apiUrl;
 
-export async function GET(req: Request, res: NextResponse) {
-    const url = new URL(req.url)
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+    const {id} = params
     try {
         const response = await axios.request({
             method: 'GET',
-            url: `${apiUrl}/product/8df8dade-3cea-4424-8cf5-e7e86f361ea0`,
+            url: `${apiUrl}/product/${id}`,
         });
         return Response.json({ ...response?.data }, { status: 200 })
     } catch (error) {
