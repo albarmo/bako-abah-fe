@@ -12,29 +12,57 @@ import { fetchProductList } from "@/helpers/product_server";
 import useCustomQuery from "@/hooks/useCustomQuery";
 import { useState } from "react";
 import { fetchStoreList } from "@/helpers/store_server";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 export default function Home() {
-    const [params, setParams] = useState<ParamsType>({
+    const [params, setParams] = useState<Params>({
+        limit: 25,
         page: 1,
-        limit: 10,
-        field: '',
-        sort: 'desc',
-        keyword: '',
-        type: 1,
-    });
-
+        filter: { is_active: true },
+        sort: "name",
+    })
     const {
-        data,
-        isLoading
+        data: allProducts,
     } = useCustomQuery('productList', params, fetchProductList);
 
     const {
+        data: latestProduct,
+    } = useCustomQuery('latestProduct', {
+        limit: 5,
+        page: 1,
+        filter: { is_active: true },
+        sort: "createdAt",
+    }, fetchProductList);
+
+    const {
+        data: bundlings,
+    } = useCustomQuery('bundlings', {
+        limit: 10,
+        page: 1,
+        filter: { is_active: true, category_id: "dd9f8b80-7c5a-4b1d-b8f2-2238e54443c0" },
+        sort: "createdAt",
+    }, fetchProductList);
+
+
+    const {
+        data: accesories,
+    } = useCustomQuery('accsories', {
+        limit: 10,
+        page: 1,
+        filter: { is_active: true, category_id: "dd9f8b80-7c5a-4b1d-b8f2-2238e54443c0" },
+        sort: "createdAt",
+    }, fetchProductList);
+
+    const {
         data: store,
-        isLoading: isLoadingStore
-    } = useCustomQuery('storeList', params, fetchStoreList);
+    } = useCustomQuery('storeList', {
+        page: 1,
+        limit: 10,
+        sort: 'name',
+    }, fetchStoreList);
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-3 mt-16 md:mt-18 md:p-24">
+        <main className="flex min-h-screen flex-col items-center justify-between space-y-8 p-3 mt-16 md:mt-18 md:p-24">
             {/* HERO */}
             <div className="w-screen">
                 <Image
@@ -67,8 +95,8 @@ export default function Home() {
                     </ul>
                 </section>
             </div>
-            {/* Bundling */}
-            <ProductList data={data?.data} />
+            {/* Latest Product */}
+            <ProductList title="Produk Terbaru" data={latestProduct?.data} hasSeeAll={false} />
             {/* Store */}
             <section className="w-full block">
                 <h1 className="text-2xl font-base">Toko Abah</h1>
@@ -156,9 +184,11 @@ export default function Home() {
                 </div>
             </section>
             {/* All Products */}
-            <ProductList data={data?.data} />
-            {/* Accesories Slider */}
-            <ProductSlider data={data?.data} />
+            <ProductList title="Produk" data={allProducts?.data} />
+            {/* Produk Bundling */}
+            <ProductSlider title="Produk Bundling" data={bundlings?.data} />
+            {/* Aksesories */}
+            <ProductList title="Aksesoris" data={accesories?.data} />
             {/* Brands */}
             <div className="w-full">
                 <h1 className="text-2xl font-base">Brand Tembakau Pilihan</h1>

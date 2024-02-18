@@ -14,9 +14,6 @@ const RegisterFormsInput = [
         label: "Nama Depan",
         type: "text",
         placeholder: "Masukan Nama Depan Anda",
-        icon: (
-            <UserIcon className="w-6 h-6 absolute mt-2 ml-3 pointer-events-none color-gray-300" />
-        ),
     },
     {
         key: "last_name",
@@ -29,34 +26,26 @@ const RegisterFormsInput = [
         label: "Email",
         type: "text",
         placeholder: "Masukan Email Anda",
-        icon: (
-            <EnvelopeIcon className="w-6 h-6 absolute mt-2 ml-3 pointer-events-none color-gray-300" />
-        ),
     },
     {
         key: "phone_number",
         label: "Nomor Telepon",
         type: "text",
         placeholder: "Masukan Nomor Telepon (WA)",
-        icon: (
-            <PhoneIcon className="w-6 h-6 absolute mt-2 ml-3 pointer-events-none color-gray-300" />
-        ),
     },
     {
         key: "password",
         label: "Password",
         type: "password",
         placeholder: "Buat Password",
-        icon: (
-            <LockClosedIcon className="w-6 h-6 absolute mt-2 ml-3 pointer-events-none" />
-        ),
+
     },
     {
         key: "password_match",
         label: "Konfrimasi Password",
         type: "password",
         placeholder: "Konfirmasi Password",
-        
+
     },
 ];
 
@@ -69,12 +58,11 @@ const SignUp = () => {
                     <form action="" className="grid grid-cols-1 gap-5">
                         {RegisterFormsInput.map((input) => (
                             <section key={input.key} className="relative">
-                                {input?.icon && input?.icon}
                                 <input
                                     name={input.key}
                                     type={input.type}
                                     placeholder={input.placeholder}
-                                    className="w-full h-10 p-3 px-10 placeholder-gray-300 text-black rounded-sm border-none ring-1 ring-gray-200"
+                                    className="w-full h-10 p-3 placeholder-gray-300 text-black text-sm rounded-sm border-none ring-1 ring-gray-200"
                                 />
                             </section>
                         ))}
@@ -86,16 +74,9 @@ const SignUp = () => {
                         </button>
                     </form>
                     <h1 className="flex justify-center text-sm">
-                        or Login with Another Account
-                    </h1>
-                    <button className="w-full flex justify-center items-center">
-                        <AtSymbolIcon className="w-7 h-7" />
-                        Sign in With Google Account
-                    </button>
-                    <h1 className="flex justify-center text-sm">
-                        Dont have an account?
-                        <Link href={"/sign-up"} className="font-semibold ml-1">
-                            Sign Up
+                        Sudah punya akun ?
+                        <Link href={"/sign-in"} className="font-semibold ml-1">
+                            Login
                         </Link>
                     </h1>
                 </article>

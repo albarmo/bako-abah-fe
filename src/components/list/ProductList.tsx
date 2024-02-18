@@ -1,22 +1,23 @@
 "use client";
 
 import React from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, cn } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { fromatRupiah } from "@/utils/func";
-const fallbackSrc = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAACUCAMAAABREOc7AAAAPFBMVEXm6eyQm6fq7e/S1tujrLagqbPa3uHj5und4eWmr7jX29+cpbDb3uOTnqmWoauutb7L0NWyusG8w8nFytCrkPVyAAABhUlEQVR4nO3Zy46DIBhAYeSiXApY+/7vOqDTmdSy1sV/vk0TuyEnlIIoBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAi6ZG7B3UL7c2YF9hjrXasruJqGJeLGyk5mbsHdzVXnvNYLfbuwV1smVwc/xq0SdNy8Whu1mL48Tf6ITaG9lGdZsjDCY2xPJ0Lp38PqTH8VnIuwXzUkBpjdm6da34Ro8WIOcx6m7bfGMeH1Bi+ZhtKOmaGjtu+pkqNoUxbM6Ztf6KNLW5WgmOo5bUdm+/eopT+UG6M9yajtchhDdl5LTjGQbdzm33o2ebkvfAY+7yYtWo1ijOyY7xbqL1GEXs26f5b7DWS6Bi9xd95vteQG0N/tNjXUrExzi36gUVsjK8Wgjdd3y3kxmgt6vldqNQYoxZK5DvQ2M9mvcXpftGkLCyGah1MKPbl41kt9e7BXa2dzHLbebt0lrOLdw/ucmsNY08j7q6135gML+G/7lEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQIIfVKAQLyZiv80AAAAASUVORK5CYII='
 
 interface IPropsProductList {
+    title: string
     data: { rows: any[] } | undefined
+    hasSeeAll?: boolean
 }
-const ProductList: React.FC<IPropsProductList> = ({ data }) => {
+const ProductList: React.FC<IPropsProductList> = ({ title, data, hasSeeAll = true }) => {
     const router = useRouter();
     return (
-        <div className="py-8">
+        <div className="w-full">
             <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-base">Produk</h1>
-                <Link href={"/product"} className="text-orange-base">
+                <h1 className="text-2xl font-base">{title}</h1>
+                <Link href={"/product"} className={cn(hasSeeAll ? "block" : "hidden", "text-orange-base")}>
                     Lihat Semua
                 </Link>
             </div>
@@ -29,21 +30,20 @@ const ProductList: React.FC<IPropsProductList> = ({ data }) => {
                         isPressable
                         onClick={() => router.push(`/product/${product?.id}`)}
                     >
-                        <CardBody className="w-full bg-gray-200 max-h-42 overflow-hidden p-0">
+                        <div className="w-full h-44 overflow-hidden p-0 bg-gray-200">
                             <Image
                                 src={product?.image}
-                                fallbackSrc={fallbackSrc}
                                 alt={product?.name}
-                                className="w-full h-full aspect-square object-cover"
+                                className="w-full h-full object-cover"
                                 radius="none"
                             />
-                        </CardBody>
+                        </div>
                         <CardFooter className="text-small text-left block">
-                            <h1 className="text-xl font-semibold line-clamp-2">
+                            <h1 className="text-lg font-semibold line-clamp-2">
                                 {product?.name}
                             </h1>
-                            <p className="text-xl text-default-500">
-                                {fromatRupiah(product?.local_price)}
+                            <p className="text-lg text-default-500">
+                                Rp {fromatRupiah(product?.local_price)}
                             </p>
                         </CardFooter>
                     </Card>

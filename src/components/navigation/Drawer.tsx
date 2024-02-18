@@ -69,7 +69,7 @@ const DrawerComponent: React.FC<IPropsDrawer> = ({
                                 category?.data?.rows?.map((category: any) => (
                                     <Link
                                         key={category?.id}
-                                        href={`/${category?.name?.toLowerCase()}`}
+                                        href={`/category/${category?.id}`}
                                         onClick={() => {
                                             close();
                                             setCurrentSection(category?.name);
@@ -111,6 +111,7 @@ const DrawerComponent: React.FC<IPropsDrawer> = ({
                                         <Link
                                             key={item.id}
                                             href={item.ref}
+                                            target="_blank"
                                             onClick={() => {
                                                 close();
                                                 setCurrentSection(item.ref);

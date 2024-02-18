@@ -6,14 +6,15 @@ import { useRouter } from "next/navigation";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 interface IPropsProductSlider {
+    title: string,
     data: { rows: any[] } | undefined
 }
-const ProductSlider: React.FC<IPropsProductSlider> = ({ data }) => {
+const ProductSlider: React.FC<IPropsProductSlider> = ({ title, data }) => {
     const router = useRouter();
     return (
         <div className="w-full h-full py-8">
             <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-base">Produk Bundling</h1>
+                <h1 className="text-2xl font-base">{title}</h1>
                 <Link href={"/product"} className="text-orange-base">
                     Lihat Semua
                 </Link>

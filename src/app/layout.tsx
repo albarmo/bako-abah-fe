@@ -3,7 +3,6 @@ import { Alumni_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navigation/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
-import Footer from "@/components/navigation/Footer";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const alumniSans = Alumni_Sans({
@@ -50,7 +49,6 @@ export default function RootLayout({
                     <NextUIProvider>
                         <Navbar />
                         {children}
-                        <Footer />
                     </NextUIProvider>
                 </QueryClientProvider>
             </body>
