@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Card, CardBody, CardFooter, Image, cn } from "@nextui-org/react";
+import { Card, CardFooter, Image, cn } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { fromatRupiah } from "@/utils/func";
